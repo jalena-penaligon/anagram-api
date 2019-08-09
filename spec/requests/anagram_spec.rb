@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 describe "Anagrams API" do
+  before(:each) do
+    dear = DictionaryWord.create!(word: "dear")
+    dare = DictionaryWord.create!(word: "dare")
+    read = DictionaryWord.create!(word: "read")
+  end
   it 'can get anagrams of a word' do
     dear = Word.create!(name: "dear")
     dare = Word.create!(name: "dare")
@@ -19,19 +24,24 @@ describe "Anagrams API" do
   end
 
   it 'can add words to the corpus, then view their anagrams' do
-    dear = DictionaryWord.create!(word: "dear")
-    dare = DictionaryWord.create!(word: "dare")
-    read = DictionaryWord.create!(word: "read")
-
     body = {"words": ["read", "dear", "dare"] }
     post "/words", params: body
 
     get "/anagrams/dare"
     words = JSON.parse(response.body)
-    binding.pry
 
     expect(words["anagrams"].count).to eq(2)
     expect(words["anagrams"][0]).to eq("dear")
     expect(words["anagrams"][1]).to eq("read")
+  end
+
+  it 'can request anagrams with a limit' do
+    body = {"words": ["read", "dear", "dare"] }
+    post "/words", params: body
+
+    get "/anagrams/dare?limit=1"
+    words = JSON.parse(response.body)
+
+    expect(words["anagrams"].count).to eq(1)
   end
 end
