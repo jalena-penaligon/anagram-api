@@ -13,14 +13,14 @@ class Word < ApplicationRecord
   def find_anagrams
     potential_anagrams = Word.where(char_count: self.name.length)
     potential_anagrams.each do |anagram|
-      if valid_anagram(anagram, self)
+      if self.valid_anagram(anagram)
         add_anagrams(anagram, self)
       end
     end
   end
 
-  def valid_anagram(anagram, word)
-    anagram.id != word.id && arrange(anagram.name) == arrange(word.name)
+  def valid_anagram(anagram)
+    anagram.id != self.id && arrange(anagram.name) == arrange(self.name)
   end
 
   def arrange(word)
