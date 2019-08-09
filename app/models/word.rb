@@ -10,7 +10,7 @@ class Word < ApplicationRecord
     end
   end
 
-  def self.anagrams(word, limit)
+  def self.anagrams(word, limit = nil)
     where(key: word.key)
     .where.not(id: word.id)
     .limit(limit)

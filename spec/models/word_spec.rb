@@ -22,5 +22,13 @@ RSpec.describe Word, type: :model do
 
       expect(Word.count).to eq(3)
     end
+
+    it 'anagrams finds all anagrams from corpus' do
+      dear = Word.create(name: "dear", key: "ader")
+      dare = Word.create(name: "dare", key: "ader")
+      read = Word.create(name: "read", key: "ader")
+
+      expect(Word.anagrams(dear)).to eq(["dare", "read"])
+    end
   end
 end
