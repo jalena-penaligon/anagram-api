@@ -2,15 +2,15 @@ require 'rails_helper'
 
 describe "Words API" do
   before(:each) do
-    dear = DictionaryWord.create!(word: "dear")
-    dare = DictionaryWord.create!(word: "dare")
-    read = DictionaryWord.create!(word: "read")
+    dear = DictionaryWord.create!(word: "dear", key: "ader")
+    dare = DictionaryWord.create!(word: "dare", key: "ader")
+    read = DictionaryWord.create!(word: "read", key: "ader")
   end
 
   it 'can get words from the corpus' do
-    dear = Word.create!(name: "dear")
-    dare = Word.create!(name: "dare")
-    read = Word.create!(name: "read")
+    dear = Word.create!(name: "dear", key: "ader")
+    dare = Word.create!(name: "dare", key: "ader")
+    read = Word.create!(name: "read", key: "ader")
 
     get "/words"
     expect(response).to be_successful
@@ -43,7 +43,6 @@ describe "Words API" do
     delete "/words"
     expect(response).to have_http_status(204)
     expect(Word.count).to eq(0)
-    expect(AnagramWord.count).to eq(0)
   end
 
   it 'can delete a single word from the corpus' do
