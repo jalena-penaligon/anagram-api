@@ -8,10 +8,10 @@ RSpec.describe Word, type: :model do
 
   describe 'class methods' do
     before(:each) do
-      dear = DictionaryWord.create!(word: "dear")
-      dare = DictionaryWord.create!(word: "dare")
-      read = DictionaryWord.create!(word: "read")
-      read = DictionaryWord.create!(word: "dread")
+      dear = DictionaryWord.create!(word: "dear", key: "ader")
+      dare = DictionaryWord.create!(word: "dare", key: "ader")
+      read = DictionaryWord.create!(word: "read", key: "ader")
+      read = DictionaryWord.create!(word: "dread", key: "adder")
     end
 
     it 'bulk_create builds multiple words from an array' do
@@ -21,28 +21,6 @@ RSpec.describe Word, type: :model do
       Word.bulk_create(words)
 
       expect(Word.count).to eq(3)
-    end
-  end
-
-  describe 'instance methods' do
-    it 'find_anagrams creates valid anagrams' do
-      word = Word.create(name: "dear", char_count: 4)
-      anagram = Word.create(name: "read", char_count: 4)
-
-      expect(AnagramWord.all.count).to eq(0)
-      word.find_anagrams
-      expect(AnagramWord.all.count).to eq(2)
-    end
-
-    it 'valid_anagram returns true if a word is an anagram' do
-      word = Word.create(name: "dear", char_count: 4)
-      anagram = Word.create(name: "read", char_count: 4)
-
-      expect(word.valid_anagram(anagram)).to eq(true)
-      expect(word.valid_anagram(word)).to eq(false)
-
-      anagram = Word.create(name: "dread", char_count: 5)
-      expect(word.valid_anagram(anagram)).to eq(false)
     end
   end
 end
