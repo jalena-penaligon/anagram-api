@@ -12,9 +12,7 @@ class AnagramsController < ApplicationController
     if word == nil
       return []
     else
-      AnagramWord.where(word_id: word.id)
-                 .limit(params["limit"])
-                 .pluck(:anagram_name).sort
-     end
+      Word.anagrams(word, params["limit"])
+    end
   end
 end
