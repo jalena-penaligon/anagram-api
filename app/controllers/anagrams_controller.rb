@@ -1,8 +1,16 @@
 class AnagramsController < ApplicationController
   def show
-    word = Word.find_by(name: params["word"])
     render json: {
-      anagrams: AnagramWord.where(word_id: word.id).pluck(:anagram_name).sort
+      anagrams: get_anagrams
     }
+  end
+
+  private
+
+  def get_anagrams
+    word = Word.find_by(name: params["word"])
+    AnagramWord.where(word_id: word.id)
+               .limit(params["limit"])
+               .pluck(:anagram_name).sort
   end
 end
