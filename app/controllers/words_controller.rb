@@ -19,5 +19,6 @@ class WordsController < ApplicationController
 
   def destroy_all
     Word.destroy_all
+    AnagramWord.destroy_all
   end
 end

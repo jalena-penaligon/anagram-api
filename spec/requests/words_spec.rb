@@ -43,6 +43,7 @@ describe "Words API" do
     delete "/words"
     expect(response).to have_http_status(204)
     expect(Word.count).to eq(0)
+    expect(AnagramWord.count).to eq(0)
   end
 
   it 'can delete a single word from the corpus' do
