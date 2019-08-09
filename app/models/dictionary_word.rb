@@ -1,0 +1,2 @@
+class DictionaryWord < ApplicationRecord
+end
