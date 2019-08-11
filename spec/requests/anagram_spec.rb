@@ -5,6 +5,7 @@ describe "Anagrams API" do
     dear = DictionaryWord.create!(word: "dear", key: "ader")
     dare = DictionaryWord.create!(word: "dare", key: "ader")
     read = DictionaryWord.create!(word: "read", key: "ader")
+    drae = DictionaryWord.create!(word: "Drae", key: "ader")
     read = DictionaryWord.create!(word: "adder", key: "adder")
     read = DictionaryWord.create!(word: "adred", key: "adder")
     read = DictionaryWord.create!(word: "dread", key: "adder")
@@ -41,5 +42,24 @@ describe "Anagrams API" do
     words = JSON.parse(response.body)
 
     expect(words["anagrams"].count).to eq(0)
+  end
+
+  it 'can optionally include or exclude proper nouns' do
+    dear = Word.create!(name: "dear", key: "ader", char_count: 4)
+    dare = Word.create!(name: "dare", key: "ader", char_count: 4)
+    read = Word.create!(name: "read", key: "ader", char_count: 4)
+    drae = Word.create!(name: "Drae", key: "ader", char_count: 4)
+
+    get "/anagrams/read?nouns=true"
+    words = JSON.parse(response.body)
+
+    expect(words["anagrams"].count).to eq(3)
+    expect(words["anagrams"].first).to eq("Drae")
+
+    get "/anagrams/read?nouns=false"
+    words = JSON.parse(response.body)
+
+    expect(words["anagrams"].count).to eq(2)
+    expect(words["anagrams"].first).to eq("dare")
   end
 end
