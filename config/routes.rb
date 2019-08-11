@@ -9,4 +9,8 @@ Rails.application.routes.draw do
   scope :anagrams do
     get '/:word', to: 'anagrams#show'
   end
+
+  scope :word_count do
+    get '/', to: 'word_count#show'
+  end
 end
