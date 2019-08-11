@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2019_08_09_075259) do
 
   create_table "words", force: :cascade do |t|
     t.string "name"
+    t.integer "char_count"
     t.string "key"
   end
 

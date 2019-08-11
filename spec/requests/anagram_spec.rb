@@ -12,9 +12,9 @@ describe "Anagrams API" do
     read = DictionaryWord.create!(word: "readd", key: "adder")
   end
   it 'can get anagrams of a word' do
-    dear = Word.create!(name: "dear", key: "ader")
-    dare = Word.create!(name: "dare", key: "ader")
-    read = Word.create!(name: "read", key: "ader")
+    dear = Word.create!(name: "dear", key: "ader", char_count: 4)
+    dare = Word.create!(name: "dare", key: "ader", char_count: 4)
+    read = Word.create!(name: "read", key: "ader", char_count: 4)
 
     get "/anagrams/read"
     expect(response).to be_successful
