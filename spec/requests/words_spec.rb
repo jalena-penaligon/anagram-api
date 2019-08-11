@@ -8,9 +8,9 @@ describe "Words API" do
   end
 
   it 'can get words from the corpus' do
-    dear = Word.create!(name: "dear", key: "ader")
-    dare = Word.create!(name: "dare", key: "ader")
-    read = Word.create!(name: "read", key: "ader")
+    dear = Word.create!(name: "dear", key: "ader", char_count: 4)
+    dare = Word.create!(name: "dare", key: "ader", char_count: 4)
+    read = Word.create!(name: "read", key: "ader", char_count: 4)
 
     get "/words"
     expect(response).to be_successful
@@ -66,5 +66,24 @@ describe "Words API" do
 
     expect(anagrams.count).to eq(1)
     expect(anagrams[0]).to eq("dare")
+  end
+
+end
+describe 'Word Count API' do
+  before(:each) do
+    dear = Word.create!(name: "dear", key: "ader", char_count: 4)
+    abstract = Word.create!(name: "abstract", key: "aabcrstt", char_count: 8)
+    drive = Word.create!(name: "drive", key: "deirv", char_count: 5)
+  end
+
+  it 'get /words_count returns corpus stats' do
+    get "/word_count"
+    expect(response).to be_successful
+
+    words = JSON.parse(response.body)["statistics"]
+    expect(words["total_words"]).to eq(3)
+    expect(words["min_length"]).to eq(4)
+    expect(words["max_length"]).to eq(8)
+    expect(words["average_length"]).to eq("5.67")
   end
 end
