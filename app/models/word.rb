@@ -10,11 +10,26 @@ class Word < ApplicationRecord
     end
   end
 
-  def self.anagrams(word, limit = nil)
+  def self.anagrams(word, limit = nil, nouns = "true")
+    if nouns == "true"
+      Word.all_anagrams(word, limit)
+    else
+      Word.filtered_anagrams(word, limit)
+    end
+  end
+
+  def self.all_anagrams(word, limit = nil)
     where(key: word.key)
     .where.not(id: word.id)
     .limit(limit)
     .pluck(:name).sort
+  end
+
+  def self.filtered_anagrams(word, limit)
+    all_words = Word.all_anagrams(word, limit)
+    all_words.select do |word|
+      word != word.capitalize
+    end
   end
 
   def self.statistics

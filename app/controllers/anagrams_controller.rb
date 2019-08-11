@@ -12,7 +12,7 @@ class AnagramsController < ApplicationController
     if word == nil
       return []
     else
-      Word.anagrams(word, params["limit"])
+      Word.anagrams(word, params["limit"], params["nouns"])
     end
   end
 end
