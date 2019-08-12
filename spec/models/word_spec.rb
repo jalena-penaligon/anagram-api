@@ -11,6 +11,7 @@ RSpec.describe Word, type: :model do
       dear = DictionaryWord.create!(word: "dear", key: "ader")
       dare = DictionaryWord.create!(word: "dare", key: "ader")
       read = DictionaryWord.create!(word: "read", key: "ader")
+      drae = DictionaryWord.create!(word: "Drae", key: "ader")
       dread = DictionaryWord.create!(word: "dread", key: "adder")
     end
 
@@ -21,6 +22,16 @@ RSpec.describe Word, type: :model do
       Word.bulk_create(words)
 
       expect(Word.count).to eq(3)
+    end
+
+    it 'bulk_create adds words with keys that are the same whether noun or not' do
+      expect(Word.count).to eq(0)
+
+      words = ["dear", "Drae"]
+      Word.bulk_create(words)
+    
+      expect(Word.first.key).to eq("ader")
+      expect(Word.last.key).to eq("ader")
     end
 
     it 'statistics returns a hash of stat info' do
