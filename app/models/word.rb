@@ -2,11 +2,19 @@ class Word < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   def self.bulk_create(words)
-    words.each do |word|
+    new_words = words.map do |word|
       if DictionaryWord.find_by(word: word) != nil
         key = word.split("").sort.join
-        new_word = Word.create(name: word, key: key, char_count: word.length)
+        new_word = Word.new(name: word, key: key, char_count: word.length)
       end
+    end
+    create_words(new_words)
+  end
+
+  def self.create_words(words)
+    new_words = words.select { |word| word != nil}
+    if new_words != [nil]
+      Word.import new_words
     end
   end
 
