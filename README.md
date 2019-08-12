@@ -92,6 +92,16 @@ This API is available in production at:
         Sample Response:
           { "are_anagrams?": true }
 
+  #### GET /most_anagrams
+        Sample Response:
+          {
+            "most_anagrams": [
+                "dare",
+                "dear",
+                "read"
+            ]
+          }
+
   #### GET /anagram_groups
         Sample Response:
         {
