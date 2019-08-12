@@ -52,7 +52,7 @@ This API is available in production at: http://anagramsapi.us-east-2.elasticbean
       Sample Response:
         Status: 201 Created
 
-  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/anagrams/:word
+  #### GET http://anagramsapi.us-east-2.elasticbeanstalk.com/anagrams/:word
         Optional Params:
           limit=1 : Only returns the number of specified records
           nouns=true : Returns all anagrams
