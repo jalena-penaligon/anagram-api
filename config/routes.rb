@@ -17,4 +17,8 @@ Rails.application.routes.draw do
   scope :most_anagrams do
     get '/', to: 'most_anagrams#show'
   end
+
+  scope :anagram_matcher do
+    get '/', to: 'anagram_matcher#show'
+  end
 end
