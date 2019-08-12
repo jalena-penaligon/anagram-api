@@ -126,9 +126,9 @@ This API is available in production at: http://anagrams.us-east-2.elasticbeansta
         Sample Response: 204 No Content
 
 ### Considerations:
-    - Currently only English words from dictionary.txt can be added to the corpus. With this constraint, it may be helpful to have an additional endpoint to post words to the dictionary, should someone want to add pop-culture related words that may not exist in the dictionary.
-    - By starting with an empty corpus, queries can execute quickly and efficiently. It does not exert additional load on the database searching through records that may never need to be accessed.
-    - In terms of user experience, some functionality could be improved in the future, such as:
-        1. Importing all anagrams from the dictionary when words are added at POST /words (however this functionality would cause the provided test suite to fail)
-        2. If a word does not exist in the corpus and is called at GET /anagrams/:word, it would be a more positive user experience to add that word to the corpus as well as all of their associated anagrams, rather than showing an empty array
-        3. When comparing an array of words to see if they are anagrams, it will currently return false if one or more words do not exist in the corpus, even if they are actual anagrams. A better user experience could be to add those words to the corpus, and return true. 
+- Currently only English words from dictionary.txt can be added to the corpus. With this constraint, it may be helpful to have an additional endpoint to post words to the dictionary, should someone want to add pop-culture related words that may not exist in the dictionary.
+- By starting with an empty corpus, queries can execute quickly and efficiently. It does not exert additional load on the database searching through records that may never need to be accessed.
+- In terms of user experience, some functionality could be improved in the future, such as:
+    1. Importing all anagrams from the dictionary when words are added at POST /words (however this functionality would cause the provided test suite to fail)
+    2. If a word does not exist in the corpus and is called at GET /anagrams/:word, it would be a more positive user experience to add that word to the corpus as well as all of their associated anagrams, rather than showing an empty array
+    3. When comparing an array of words to see if they are anagrams, it will currently return false if one or more words do not exist in the corpus, even if they are actual anagrams. A better user experience could be to add those words to the corpus, and return true.
