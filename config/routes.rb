@@ -13,4 +13,8 @@ Rails.application.routes.draw do
   scope :word_count do
     get '/', to: 'word_count#show'
   end
+
+  scope :most_anagrams do
+    get '/', to: 'most_anagrams#show'
+  end
 end
