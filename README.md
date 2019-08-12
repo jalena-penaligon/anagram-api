@@ -86,6 +86,9 @@ This API is available in production at: http://anagramsapi.us-east-2.elasticbean
         }
 
   #### GET http://anagramsapi.us-east-2.elasticbeanstalk.com/anagram_matcher
+        Headers:
+            Content-Type: application/json
+            Accept: application/json
         Body:
           { "words": ["read", "dear", "dare"] }
 
