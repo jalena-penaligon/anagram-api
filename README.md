@@ -5,7 +5,7 @@ The project is to build an API that allows fast searches for [anagrams](https://
 
 ## Production URL
 
-This API is available in production at: http://anagrams.us-east-2.elasticbeanstalk.com 
+This API is available in production at: http://anagrams.us-east-2.elasticbeanstalk.com
 
 ## Instructions
 
@@ -17,7 +17,7 @@ This API is available in production at: http://anagrams.us-east-2.elasticbeansta
     rails s
 
 ### Available Endpoints:
-  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/words
+  #### GET http://anagramsapi.us-east-2.elasticbeanstalk.com/words
       Sample Response:
       [{
         id: 25,
@@ -39,7 +39,7 @@ This API is available in production at: http://anagrams.us-east-2.elasticbeansta
       }]
 
 
-  #### POST http://anagrams.us-east-2.elasticbeanstalk.com/words
+  #### POST http://anagramsapi.us-east-2.elasticbeanstalk.com/words
       Headers:
         Content-Type: application/json
         Accept: application/json
@@ -66,11 +66,11 @@ This API is available in production at: http://anagrams.us-east-2.elasticbeansta
           ]
         }
 
-  #### DELETE http://anagrams.us-east-2.elasticbeanstalk.com/words/:word
+  #### DELETE http://anagramsapi.us-east-2.elasticbeanstalk.com/words/:word
       Sample Response:
         204 No Content
 
-  #### DELETE http://anagrams.us-east-2.elasticbeanstalk.com/words
+  #### DELETE http://anagramsapi.us-east-2.elasticbeanstalk.com/words
       Sample Response:
         204 No Content
 
@@ -122,7 +122,7 @@ This API is available in production at: http://anagrams.us-east-2.elasticbeansta
           }
         }
 
-  #### DELETE http://anagrams.us-east-2.elasticbeanstalk.com/words/anagrams/:word
+  #### DELETE http://anagramsapi.us-east-2.elasticbeanstalk.com/words/anagrams/:word
         Sample Response: 204 No Content
 
 ### Considerations:
