@@ -39,6 +39,10 @@ RSpec.describe Word, type: :model do
         @dare = Word.create(name: "dare", key: "ader", char_count: 4)
         @read = Word.create(name: "read", key: "ader", char_count: 4)
         @drae = Word.create(name: "Drae", key: "ader", char_count: 4)
+        @arid = Word.create(name: "arid", key: "adir", char_count: 4)
+        @raid = Word.create(name: "raid", key: "adir", char_count: 4)
+        @urn = Word.create(name: "urn", key: "nru", char_count: 4)
+        @run = Word.create(name: "run", key: "nru", char_count: 4)
       end
 
       it 'anagrams finds all anagrams from corpus' do
@@ -59,6 +63,12 @@ RSpec.describe Word, type: :model do
 
         words = ["dread", "read"]
         expect(Word.anagram_matcher(words)).to eq(false)
+      end
+
+      it 'anagram_groups sort anagrams by the number of words in a collection' do
+        expect(Word.anagram_groups).to have_key("2")
+        expect(Word.anagram_groups["2"].count).to eq(2)
+        expect(Word.anagram_groups).to have_key("4")
       end
     end
   end
