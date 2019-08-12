@@ -5,7 +5,7 @@ The project is to build an API that allows fast searches for [anagrams](https://
 
 ## Production URL
 
-This API is available in production at: http://anagrams.us-east-2.elasticbeanstalk.com
+This API is available in production at: http://anagramsapi.us-east-2.elasticbeanstalk.com/
 
 ## Instructions
 
@@ -52,7 +52,7 @@ This API is available in production at: http://anagrams.us-east-2.elasticbeansta
       Sample Response:
         Status: 201 Created
 
-  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/anagrams/:word
+  #### GET http://anagramsapi.us-east-2.elasticbeanstalk.com/anagrams/:word
         Optional Params:
           limit=1 : Only returns the number of specified records
           nouns=true : Returns all anagrams
@@ -74,7 +74,7 @@ This API is available in production at: http://anagrams.us-east-2.elasticbeansta
       Sample Response:
         204 No Content
 
-  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/word_count
+  #### GET http://anagramsapi.us-east-2.elasticbeanstalk.com/word_count
       Sample Response:
         {
           "statistics": {
@@ -85,14 +85,17 @@ This API is available in production at: http://anagrams.us-east-2.elasticbeansta
           }
         }
 
-  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/anagram_matcher
+  #### GET http://anagramsapi.us-east-2.elasticbeanstalk.com/anagram_matcher
+        Headers:
+            Content-Type: application/json
+            Accept: application/json
         Body:
           { "words": ["read", "dear", "dare"] }
 
         Sample Response:
           { "are_anagrams?": true }
 
-  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/most_anagrams
+  #### GET http://anagramsapi.us-east-2.elasticbeanstalk.com/most_anagrams
         Sample Response:
           {
             "most_anagrams": [
@@ -102,7 +105,7 @@ This API is available in production at: http://anagrams.us-east-2.elasticbeansta
             ]
           }
 
-  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/anagram_groups
+  #### GET http://anagramsapi.us-east-2.elasticbeanstalk.com/anagram_groups
         Sample Response:
         {
           "groups": {
