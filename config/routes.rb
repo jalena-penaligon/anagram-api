@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     post '/', to: 'words#create'
     delete '/:word', to: 'words#destroy'
     delete '/', to: 'words#destroy_all'
+
+    namespace :anagrams do
+      delete '/:word', to: 'words#destroy'
+    end
   end
 
   scope :anagrams do
@@ -16,5 +20,13 @@ Rails.application.routes.draw do
 
   scope :most_anagrams do
     get '/', to: 'most_anagrams#show'
+  end
+
+  scope :anagram_matcher do
+    get '/', to: 'anagram_matcher#show'
+  end
+
+  scope :anagram_groups do
+    get '/', to: 'anagram_groups#show'
   end
 end

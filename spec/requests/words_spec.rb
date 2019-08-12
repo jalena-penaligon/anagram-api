@@ -7,18 +7,6 @@ describe "Words API" do
     read = DictionaryWord.create!(word: "read", key: "ader")
   end
 
-  it 'can get words from the corpus' do
-    dear = Word.create!(name: "dear", key: "ader", char_count: 4)
-    dare = Word.create!(name: "dare", key: "ader", char_count: 4)
-    read = Word.create!(name: "read", key: "ader", char_count: 4)
-
-    get "/words"
-    expect(response).to be_successful
-
-    words = JSON.parse(response.body)
-    expect(words.count).to eq(3)
-  end
-
   it 'can add words to the corpus' do
     body = {"words": ["read", "dear", "dare"] }
     post "/words", params: body
@@ -32,12 +20,25 @@ describe "Words API" do
     post "/words", params: body
     expect(response).to have_http_status(201)
 
-    expect(Word.count).to eq(0)
+    expect(Word.find_by(name: "zyxwv")).to eq(nil)
   end
 
+  before(:each) do
+    dear = Word.create!(name: "dear", key: "ader", char_count: 4)
+    dare = Word.create!(name: "dare", key: "ader", char_count: 4)
+    read = Word.create!(name: "read", key: "ader", char_count: 4)
+  end
+
+  it 'can get words from the corpus' do
+    get "/words"
+    expect(response).to be_successful
+
+    words = JSON.parse(response.body)
+    expect(words.count).to eq(3)
+  end
+
+
   it 'can delete all words from the corpus' do
-    body = {"words": ["read", "dear", "dare"] }
-    post "/words", params: body
     expect(Word.count).to eq(3)
 
     delete "/words"
@@ -46,8 +47,6 @@ describe "Words API" do
   end
 
   it 'can delete a single word from the corpus' do
-    body = {"words": ["read", "dear", "dare"] }
-    post "/words", params: body
     expect(Word.count).to eq(3)
 
     delete "/words/dear"
@@ -56,8 +55,6 @@ describe "Words API" do
   end
 
   it 'deleting a single word also deletes associated anagrams' do
-    body = {"words": ["read", "dear", "dare"] }
-    post "/words", params: body
     expect(Word.count).to eq(3)
 
     delete "/words/dear"
@@ -66,6 +63,14 @@ describe "Words API" do
 
     expect(anagrams.count).to eq(1)
     expect(anagrams[0]).to eq("dare")
+  end
+
+  it 'delete /words/anagrams will delete a word and all other anagram words' do
+    delete "/words/anagrams/read"
+
+    expect(Word.find_by(name: "read")).to eq(nil)
+    expect(Word.find_by(name: "dear")).to eq(nil)
+    expect(Word.find_by(name: "dare")).to eq(nil)
   end
 
 end

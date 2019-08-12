@@ -50,4 +50,30 @@ class Word < ApplicationRecord
     .order('total_anagrams DESC')
     .limit(1)
   end
+
+  def self.anagram_matcher(words_array)
+    words = Word.where(name: words_array)
+    if words_array.count == words.count
+      words.all? { |word| word.key == words.first.key }
+    else
+      false
+    end
+  end
+
+  def self.anagram_groups
+    groups = Hash.new
+    get_keys.each do |key|
+      words = Word.where(key: key).pluck(:name).sort
+      if groups[words.length.to_s] != nil
+        groups[words.length.to_s] << words
+      else
+        groups[words.length.to_s] = [words]
+      end
+    end
+    groups.sort.to_h
+  end
+
+  def self.get_keys
+    Word.pluck(:key).uniq
+  end
 end
