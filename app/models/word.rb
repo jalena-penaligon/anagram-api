@@ -38,4 +38,16 @@ class Word < ApplicationRecord
     max_length: Word.maximum(:char_count),
     average_length: Word.average(:char_count).round(2)}
   end
+
+  def self.most_anagrams
+    anagram = find_most_common_key
+    Word.where(key: anagram.first.key).pluck(:name).sort
+  end
+
+  def self.find_most_common_key
+    select("words.key, count(words.key) as total_anagrams")
+    .group(:key)
+    .order('total_anagrams DESC')
+    .limit(1)
+  end
 end
