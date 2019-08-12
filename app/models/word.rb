@@ -50,4 +50,13 @@ class Word < ApplicationRecord
     .order('total_anagrams DESC')
     .limit(1)
   end
+
+  def self.anagram_matcher(words_array)
+    words = Word.where(name: words_array)
+    if words_array.count == words.count
+      words.all? { |word| word.key == words.first.key }
+    else
+      false
+    end
+  end
 end
