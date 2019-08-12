@@ -14,6 +14,7 @@ describe "Anagram Groups API" do
 
     words = JSON.parse(response.body)
 
+    expect(words["groups"]).to_not have_key("1")
     expect(words["groups"]["2"][0]).to eq(["adder", "dread"])
     expect(words["groups"]["3"][0]).to eq(["dare", "dear", "read"])
   end

@@ -2,11 +2,19 @@ class Word < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   def self.bulk_create(words)
-    words.each do |word|
+    new_words = words.map do |word|
       if DictionaryWord.find_by(word: word) != nil
         key = word.split("").sort.join
-        new_word = Word.create(name: word, key: key, char_count: word.length)
+        new_word = Word.new(name: word, key: key, char_count: word.length)
       end
+    end
+    create_words(new_words)
+  end
+
+  def self.create_words(words)
+    new_words = words.select { |word| word != nil}
+    if new_words != [nil]
+      Word.import new_words
     end
   end
 
@@ -61,16 +69,20 @@ class Word < ApplicationRecord
   end
 
   def self.anagram_groups
-    groups = Hash.new
+    @groups = Hash.new
     get_keys.each do |key|
       words = Word.where(key: key).pluck(:name).sort
-      if groups[words.length.to_s] != nil
-        groups[words.length.to_s] << words
-      else
-        groups[words.length.to_s] = [words]
-      end
+      add_group(words)
     end
-    groups.sort.to_h
+    @groups.sort.to_h
+  end
+
+  def self.add_group(words)
+    if @groups[words.length.to_s] != nil && words.length > 1
+      @groups[words.length.to_s] << words
+    elsif words.length > 1
+      @groups[words.length.to_s] = [words]
+    end
   end
 
   def self.get_keys
