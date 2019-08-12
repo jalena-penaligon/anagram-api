@@ -5,7 +5,7 @@ The project is to build an API that allows fast searches for [anagrams](https://
 
 ## Production URL
 
-This API is available in production at:
+This API is available in production at: http://anagrams.us-east-2.elasticbeanstalk.com
 
 ## Instructions
 
@@ -17,7 +17,7 @@ This API is available in production at:
     rails s
 
 ### Available Endpoints:
-  #### GET /words
+  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/words
       Sample Response:
       [{
         id: 25,
@@ -39,7 +39,7 @@ This API is available in production at:
       }]
 
 
-  #### POST /words
+  #### POST http://anagrams.us-east-2.elasticbeanstalk.com/words
       Headers:
         Content-Type: application/json
         Accept: application/json
@@ -52,7 +52,7 @@ This API is available in production at:
       Sample Response:
         Status: 201 Created
 
-  #### GET /anagrams/:word
+  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/anagrams/:word
         Optional Params:
           limit=1 : Only returns the number of specified records
           nouns=true : Returns all anagrams
@@ -66,15 +66,15 @@ This API is available in production at:
           ]
         }
 
-  #### DELETE /words/:word
+  #### DELETE http://anagrams.us-east-2.elasticbeanstalk.com/words/:word
       Sample Response:
         204 No Content
 
-  #### DELETE /words
+  #### DELETE http://anagrams.us-east-2.elasticbeanstalk.com/words
       Sample Response:
         204 No Content
 
-  #### GET /word_count
+  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/word_count
       Sample Response:
         {
           "statistics": {
@@ -85,14 +85,14 @@ This API is available in production at:
           }
         }
 
-  #### GET /anagram_matcher
+  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/anagram_matcher
         Body:
           { "words": ["read", "dear", "dare"] }
 
         Sample Response:
           { "are_anagrams?": true }
 
-  #### GET /most_anagrams
+  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/most_anagrams
         Sample Response:
           {
             "most_anagrams": [
@@ -102,7 +102,7 @@ This API is available in production at:
             ]
           }
 
-  #### GET /anagram_groups
+  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/anagram_groups
         Sample Response:
         {
           "groups": {
@@ -122,5 +122,13 @@ This API is available in production at:
           }
         }
 
-  #### DELETE words/anagrams/:word
+  #### DELETE http://anagrams.us-east-2.elasticbeanstalk.com/words/anagrams/:word
         Sample Response: 204 No Content
+
+### Considerations:
+    - Currently only English words from dictionary.txt can be added to the corpus. With this constraint, it may be helpful to have an additional endpoint to post words to the dictionary, should someone want to add pop-culture related words that may not exist in the dictionary.
+    - By starting with an empty corpus, queries can execute quickly and efficiently. It does not exert additional load on the database searching through records that may never need to be accessed.
+    - In terms of user experience, some functionality could be improved in the future, such as:
+        1. Importing all anagrams from the dictionary when words are added at POST /words (however this functionality would cause the provided test suite to fail)
+        2. If a word does not exist in the corpus and is called at GET /anagrams/:word, it would be a more positive user experience to add that word to the corpus as well as all of their associated anagrams, rather than showing an empty array
+        3. When comparing an array of words to see if they are anagrams, it will currently return false if one or more words do not exist in the corpus, even if they are actual anagrams. A better user experience could be to add those words to the corpus, and return true.
