@@ -4,7 +4,7 @@ class Word < ApplicationRecord
   def self.bulk_create(words)
     new_words = words.map do |word|
       if DictionaryWord.find_by(word: word) != nil
-        key = word.split("").sort.join
+        key = word.split("").sort.join.downcase
         new_word = Word.new(name: word, key: key, char_count: word.length)
       end
     end
