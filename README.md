@@ -74,7 +74,7 @@ This API is available in production at: http://anagrams.us-east-2.elasticbeansta
       Sample Response:
         204 No Content
 
-  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/word_count
+  #### GET http://anagramsapi.us-east-2.elasticbeanstalk.com/word_count
       Sample Response:
         {
           "statistics": {
@@ -85,14 +85,14 @@ This API is available in production at: http://anagrams.us-east-2.elasticbeansta
           }
         }
 
-  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/anagram_matcher
+  #### GET http://anagramsapi.us-east-2.elasticbeanstalk.com/anagram_matcher
         Body:
           { "words": ["read", "dear", "dare"] }
 
         Sample Response:
           { "are_anagrams?": true }
 
-  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/most_anagrams
+  #### GET http://anagramsapi.us-east-2.elasticbeanstalk.com/most_anagrams
         Sample Response:
           {
             "most_anagrams": [
@@ -102,7 +102,7 @@ This API is available in production at: http://anagrams.us-east-2.elasticbeansta
             ]
           }
 
-  #### GET http://anagrams.us-east-2.elasticbeanstalk.com/anagram_groups
+  #### GET http://anagramsapi.us-east-2.elasticbeanstalk.com/anagram_groups
         Sample Response:
         {
           "groups": {
