@@ -21,4 +21,8 @@ Rails.application.routes.draw do
   scope :anagram_matcher do
     get '/', to: 'anagram_matcher#show'
   end
+
+  scope :anagram_groups do
+    get '/', to: 'anagram_groups#show'
+  end
 end

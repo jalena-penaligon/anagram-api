@@ -59,4 +59,21 @@ class Word < ApplicationRecord
       false
     end
   end
+
+  def self.anagram_groups
+    groups = Hash.new
+    get_keys.each do |key|
+      words = Word.where(key: key).pluck(:name).sort
+      if groups[words.length.to_s] != nil
+        groups[words.length.to_s] << words
+      else
+        groups[words.length.to_s] = [words]
+      end
+    end
+    groups.sort.to_h
+  end
+
+  def self.get_keys
+    Word.pluck(:key).uniq
+  end
 end
