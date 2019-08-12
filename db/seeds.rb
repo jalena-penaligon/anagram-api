@@ -1,9 +1,9 @@
 words = DictionaryWord.all
 words.destroy_all
 
-words = File.open('db/dictionary.txt').map do |line|
-  key = line.strip.split("").sort.join
-  DictionaryWord.new(word: line.strip, key: key)
-end
-
-DictionaryWord.import words
+# words = File.open('db/dictionary.txt').map do |line|
+#   key = line.strip.split("").sort.join
+#   DictionaryWord.new(word: line.strip, key: key)
+# end
+#
+# DictionaryWord.import words
