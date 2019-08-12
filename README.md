@@ -131,4 +131,4 @@ This API is available in production at: http://anagrams.us-east-2.elasticbeansta
     - In terms of user experience, some functionality could be improved in the future, such as:
         1. Importing all anagrams from the dictionary when words are added at POST /words (however this functionality would cause the provided test suite to fail)
         2. If a word does not exist in the corpus and is called at GET /anagrams/:word, it would be a more positive user experience to add that word to the corpus as well as all of their associated anagrams, rather than showing an empty array
-        3. When comparing an array of words to see if they are anagrams, it will currently return false if one or more words do not exist in the corpus, even if they are actual anagrams. A better user experience could be to add those words to the corpus, and return true.
+        3. When comparing an array of words to see if they are anagrams, it will currently return false if one or more words do not exist in the corpus, even if they are actual anagrams. A better user experience could be to add those words to the corpus, and return true. 
