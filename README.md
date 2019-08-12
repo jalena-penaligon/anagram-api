@@ -5,7 +5,7 @@ The project is to build an API that allows fast searches for [anagrams](https://
 
 ## Production URL
 
-This API is available in production at: http://anagrams.us-east-2.elasticbeanstalk.com
+This API is available in production at: http://anagramsapi.us-east-2.elasticbeanstalk.com/
 
 ## Instructions
 
